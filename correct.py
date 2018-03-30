@@ -2,6 +2,7 @@
 """
 correct word
 created by gln 20180330
+the original code is from orvig.com/spell-correct.html
 """
 
 import re, collections
