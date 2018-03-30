@@ -6,6 +6,9 @@ created by gln 20180330
 
 import nltk
 from nltk.corpus import words
+import logging
+from correct import correct
+
 nltk.download('punkt')
 nltk.download("words")
 
@@ -17,7 +20,7 @@ def judge_word(sentence):
     """
 
     tokens = nltk.word_tokenize(sentence)
-    print tokens
+    logging.debug(tokens)
 
     flag_list=[]
     for word in tokens:
@@ -27,14 +30,16 @@ def judge_word(sentence):
 
 def main():
 
-    test = "agc would is going to famaly 2 3 verygood u know 实现"
+    test = "agc would is going to famaly 2 3 verygood u know 实现 , ."
     tokens, flag_list = judge_word(test)
 
     for i,item in enumerate(tokens):
        if flag_list[i]:
-          print "{} is a word".format(item)
+          logging.info("{} is a word".format(item))
        else:
-          print "{} is not a word".format(item)
+          logging.info("{} is not a word, may be {}".format(item, correct(item)))
 
 if __name__ == '__main__':
+
+    logging.basicConfig(level=logging.DEBUG)
     main()
